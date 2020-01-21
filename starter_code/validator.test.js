@@ -42,11 +42,11 @@ describe('validator module performs basic validation of', () => {
     });
 
     it('booleans', () => {
-        expect(validator.isBool(bool)).toBeTruthy();
+        expect(validator.isBoolean(bool)).toBeTruthy();
     });
 
     it('functions', () => {
-        expect(validator.isFun(func)).toBeTruthy();
+        expect(validator.isFunc(func)).toBeTruthy();
     });
 
 });
@@ -56,13 +56,14 @@ describe('validator module performs complex validations', () => {
         id:'1993',
         mame:'naseem izzat',
         age:'26',
+        hopies:[],
         musicType:['classic','pure music'],
         single:['yes']
     };
 
     it('validates the presence of required object properties at any level', () => {
         // i.e. does person.hair.color exist and have a good value, not just person.hair
-        expect(naseem.name).toBeNull();
+        expect(naseem.hopies).toBeNull();
         expect(nassem.gae).toBeEqual(24);
 
     });
