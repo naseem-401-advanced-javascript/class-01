@@ -16,8 +16,10 @@ describe('validator module performs basic validation of', () => {
     const dataTypes= [num,arr.obj,fun,bool]
     it('strings', () => {
         expect(validator.isString(str)).toBeTruthy();
-        dataType.map(ele => {
-            expect(validator.isString(ele)).toBeFalsy();
+        dataTypes.forEach(ele => {
+            if (ele !== str){
+                expect(validator.isString(ele)).toBeFalsy();
+            }
 
         });
 
@@ -31,22 +33,48 @@ describe('validator module performs basic validation of', () => {
 
     it('numbers', () => {
         expect(validator.isNum(num)).toBeTruthy();
-    });
+        dataTypes.forEach(element => {
+            if (element != num) {
+                expect(validator.isNum(element)).toBeFalsy();
+            }  
+          });
+        })
 
     it('arrays', () => {
         expect(validator.isArr(arr)).toBeTruthy();
+        for ( let i= 0; i <dataTypes.length;i++){
+            if (dataTypes[i]==arr){
+                continue;
+            }
+            expect(validator.isArr(dataTypes[i])).toBeFalsy();
+        }
     });
 
     it('objects', () => {
         expect(validator.isObj(obj)).toBeTruthy();
+        dataTypes.forEach(element=>{
+            if (element!==obj){
+                expect(validator.isObj(element)).toBeFalsy();
+            }
+        })
     });
 
     it('booleans', () => {
         expect(validator.isBoolean(bool)).toBeTruthy();
+        dataTypes.forEach(element=>{
+            if (element!==bool){
+                expect(validator.isBoolean(element)).toBeFalsy();
+            }
+        })
     });
 
     it('functions', () => {
         expect(validator.isFunc(func)).toBeTruthy();
+        dataTypes.forEach(element=>{
+            if(element!==func){
+                expect(validator.isFunc(element)).toBeFalsy
+            }
+        })
     });
 
 });
@@ -54,16 +82,17 @@ describe('validator module performs basic validation of', () => {
 describe('validator module performs complex validations', () => {
     const naseem = {
         id:'1993',
-        mame:'naseem izzat',
+        name:'naseem izzat',
         age:'26',
         hopies:[],
         musicType:['classic','pure music'],
+        anyThing:null,
         single:['yes']
     };
 
     it('validates the presence of required object properties at any level', () => {
         // i.e. does person.hair.color exist and have a good value, not just person.hair
-        expect(naseem.hopies).toBeNull();
+        expect(naseem.anyThing).toBeNull();
         expect(nassem.gae).toBeEqual(24);
 
     });
@@ -80,11 +109,12 @@ describe('validator module performs complex validations', () => {
             expect(typeof element).toBeMatch('string')
         });
     });
+    
 
     it('validates a value array against an approved list', () => {
         // i.e. a string might only be allowed to be "yes" or "no"
         let example = naseem.single.includes('yes')
-        expect(true).toBeTruthy;
+        expect(example).toBeTruthy;
     });
 
     // TODO: Cover so, so many more cases
